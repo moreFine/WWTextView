@@ -70,6 +70,12 @@
         self.textView.text = text;
     });
 }
+-(void)setAttributedText:(NSAttributedString *)attributedText{
+    _attributedText = attributedText;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.textView.attributedText = attributedText;
+    });
+}
 -(void)setFont:(UIFont *)font{
     self.textView.font = font;
 }
@@ -126,5 +132,20 @@
 - (void)setCornerRadius:(float)radius{
     self.layer.cornerRadius=radius;
     self.layer.masksToBounds=YES;
+}
+-(void)scrollRangeToVisible:(NSRange)range{
+    [self.textView scrollRangeToVisible:range];
+}
+-(void)setEditable:(BOOL)editable{
+    _editable = editable;
+    self.textView.editable = editable;
+}
+-(void)setSelectable:(BOOL)selectable{
+    _selectable = selectable;
+    self.textView.selectable = selectable;
+}
+-(void)setScrollEnabled:(BOOL)scrollEnabled{
+    _scrollEnabled = scrollEnabled;
+    self.textView.scrollEnabled = scrollEnabled;
 }
 @end
